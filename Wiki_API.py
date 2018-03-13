@@ -42,8 +42,8 @@ def summary():
 	if ans in Answers:
 		print(wikipedia.summary(N))
 		print(tmp.url)
-	elif ans == "Exit" or "exit":
-		break()
+	elif ans == "Exit" or ans == "exit":
+		return(print("Goodbye!"))
 	else:
 		print(txt[2], '') 
 		summary()
