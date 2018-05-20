@@ -4,6 +4,26 @@ import telebot
 import wikipedia
 import requests	
 import time 
+import sys
+from requests.adapters import HTTPAdapter
+
+s = requests.Session()
+s.mount('http', HTTPAdapter(max_retries=3))
+s.mount('https', HTTPAdapter(max_retries=3))
+import urllib3
+http = urllib3.PoolManager()
+http.request('GET', 'https://localhost:4433/', retries=5)
+
+import socket
+
+s = socket.socket()
+s.bind(('', 4433))
+s.listen(10)
+
+while True:
+	news, _ = s.accept()
+	time.sleep(0.5)
+	news.close()
 bot = telebot.TeleBot(config.token)
 @bot.message_handler(commands=['start']) #
 def handle_start(message):
